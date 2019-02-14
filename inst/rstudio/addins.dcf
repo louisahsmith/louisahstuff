@@ -1,0 +1,9 @@
+Name: Make headers
+Description: A Shiny gadget that allows for text input to create formatted program headers, function descriptions, and section headers
+Binding: helper
+Interactive: true
+
+Name: Word to Rmd
+Description: A Shiny gadget that allows conversion of Word documents back to Rmd files with correct references
+Binding: word_to_Rmd
+Interactive: true
