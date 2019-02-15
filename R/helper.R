@@ -1,7 +1,7 @@
 #' Insert formatted headers
 #'
 #' `helper()` is a function that runs a Shiny gadget in the viewpane
-#' to allow for the formatting and insertion of headers
+#' to allow for the formatting and insertion of headers.
 #'
 #' @param lw Integer. Width at which to split the lines. Default = 70.
 #' @param name Character. Default name to use as author. Set to NULL
@@ -11,6 +11,7 @@
 #' @import miniUI
 #' @import stringr
 #' @import rstudioapi
+#' @name helper
 
 #====================================================================#
 # Author:  Louisa H. Smith                                           #
