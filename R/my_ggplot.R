@@ -2,6 +2,7 @@
 #'
 #' @description These functions provide customization for ggplot2.
 #' @import ggplot2
+#' @import hrbrthemes
 #' @name my_ggplot
 
 #### load packages ---------------------------------------------------
@@ -82,10 +83,10 @@ my_scale_fill <- function(type = "div",
 #' @export my_theme
 #' @rdname my_ggplot
 #' @param font Logical. Whether the figure should be plotted with the Roboto Condensed font (requires installation).
-my_theme <- function(..., font = TRUE) {
+my_theme <- function(..., font = TRUE, axis = "c") {
   if (!font) {
     hrbrthemes::theme_ipsum(
-      axis_title_just = "c",
+      axis_title_just = axis,
       base_size = 12,
       axis_title_size = 12,
       axis_text_size = 10,
@@ -93,7 +94,7 @@ my_theme <- function(..., font = TRUE) {
     )
   } else {
     hrbrthemes::theme_ipsum_rc(
-      axis_title_just = "c",
+      axis_title_just = axis,
       base_size = 12,
       axis_title_size = 12,
       axis_text_size = 10,

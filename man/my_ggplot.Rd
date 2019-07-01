@@ -13,7 +13,7 @@ my_scale_color(type = "div", data = "cont", other = FALSE,
 my_scale_fill(type = "div", data = "cont", other = FALSE,
   bw = FALSE, direction = 1, ...)
 
-my_theme(..., font = TRUE)
+my_theme(..., font = TRUE, axis = "c")
 }
 \arguments{
 \item{type}{One of "div", "seq", or "qual": the type of palette desired.}
