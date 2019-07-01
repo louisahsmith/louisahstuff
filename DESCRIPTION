@@ -6,9 +6,15 @@ Authors@R:
            family = "Smith",
            role = c("aut", "cre"),
            email = "louisahsmith@gmail.com")
-Description: What the package does (one paragraph).
+Description: Contains personal functions.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
-Imports: miniUI
+Imports: 
+    miniUI,
+    ggplot2,
+    hrbrthemes,
+    rstudioapi,
+    shiny,
+    stringr
