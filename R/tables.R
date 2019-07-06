@@ -31,7 +31,7 @@ replace_elem <- function(.data, element, replacement) {
 #' @param strata a character vector of variables to stratify by (if NULL, only overall table)
 #' @param allVars a character vector of variables to be rows in the table
 #' @param factorVars a character vector of factor variables
-#' @description other parameters to print.TableOne can be passed as well
+#' @description Other parameters to `print.TableOne()` can be passed as well
 my_gt_table1 <- function(.data, strata, allVars, factorVars, test = FALSE,
                       printToggle = FALSE, noSpaces = TRUE, showAllLevels = TRUE, ...) {
 
