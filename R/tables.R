@@ -69,7 +69,7 @@ my_gt_table1 <- function(.data, strata, allVars, factorVars, test = FALSE,
     )) %>%
     rename_at(vars(starts_with("V")), ~paste("Overall"))
 
-  grps <- tableOne_strat$CatTable[[1]] %>% names %>% paste0(., " (%)")
+  grps <- tableOne$CatTable[[1]] %>% names %>% paste0(., " (%)")
 
   gt(tab, rowname_col = "level", groupname_col = "rowname") %>%
     row_group_order(groups = c(NA, grps))
