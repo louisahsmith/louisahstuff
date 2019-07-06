@@ -51,7 +51,7 @@ my_gt_table1 <- function(.data, strata, allVars, factorVars, test = FALSE,
       replace_elem("MetaData", tableOne_strat)
   }
 
-  tableOne %>%
+  tab <- tableOne %>%
     print(test = test,
           printToggle = printToggle,
           noSpaces = noSpaces,
@@ -71,7 +71,7 @@ my_gt_table1 <- function(.data, strata, allVars, factorVars, test = FALSE,
 
   grps <- tableOne$CatTable[[1]] %>% names %>% paste0(., " (%)")
 
-  gt(tableOne, rowname_col = "level", groupname_col = "rowname") %>%
+  gt(tab, rowname_col = "level", groupname_col = "rowname") %>%
     row_group_order(groups = c(NA, grps))
 }
 
