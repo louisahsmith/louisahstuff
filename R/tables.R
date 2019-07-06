@@ -1,10 +1,15 @@
 #' Tables for printing
 #'
-#' @description This function makes it easy to print all output from an rmarkdown document in a certain way.
+#' @description These functions make it easy to print output in an rmarkdown document in a certain way.
 #' @import knitr
 #' @import kableExtra
 #' @import tableone
 #' @import gt
+#' @import dplyr
+#' @import stringr
+#' @import tidyr
+#' @import tibble
+#' @import purrr
 #' @name my_tables
 
 #' @rdname my_tables

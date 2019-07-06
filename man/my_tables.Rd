@@ -21,7 +21,7 @@ my_gt_table1(.data, strata, allVars, factorVars, test = FALSE,
 \item{factorVars}{a character vector of factor variables}
 }
 \description{
-This function makes it easy to print all output from an rmarkdown document in a certain way.
+These functions make it easy to print output in an rmarkdown document in a certain way.
 
 Other parameters to `print.TableOne()` can be passed as well
 }

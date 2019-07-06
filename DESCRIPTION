@@ -17,4 +17,5 @@ Imports:
     hrbrthemes,
     rstudioapi,
     shiny,
-    stringr
+    stringr,
+    magrittr
