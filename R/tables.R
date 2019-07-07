@@ -36,10 +36,13 @@ replace_elem <- function(.data, element, replacement) {
 #' @param strata a character vector of variables to stratify by (if NULL, only overall table)
 #' @param allVars a character vector of variables to be rows in the table
 #' @param factorVars a character vector of factor variables
+#' @param iqrVars a character vector of variables to calculate median IQR for
+#' @param missing_text = a string to print instead of NA in the table (default = "---")
 #' @description Other parameters to `print.TableOne()` can be passed as well
 my_gt_table1 <- function(.data, strata = NULL, allVars, factorVars = NULL, iqrVars = NULL,
                          contDigits = 1, catDigits = 1, test = FALSE,
-                      printToggle = FALSE, noSpaces = TRUE, showAllLevels = TRUE, ...) {
+                      printToggle = FALSE, noSpaces = TRUE, showAllLevels = TRUE,
+                      missing_text = "---", ...) {
 
   tableOne <- CreateTableOne(vars = allVars, data = .data,
                                  factorVars = factorVars)
@@ -64,10 +67,13 @@ my_gt_table1 <- function(.data, strata = NULL, allVars, factorVars = NULL, iqrVa
           showAllLevels = showAllLevels,
           nonnormal = iqrVars,
           catDigits = catDigits,
-          contDigits = contDigits,
-          ...) %>%
+          contDigits = contDigits, ...) %>%
     as_tibble(rownames = NA) %>%
     rownames_to_column() %>%
+    mutate_at(vars(-level, -rowname), ~ case_when(
+      str_detect(., coll("NA")) ~ NA_character_,
+      str_detect(., coll("NaN")) ~ NA_character_,
+      TRUE ~ .)) %>%
     mutate(
       rowname = ifelse(rowname == "", NA, rowname),
            rowname = str_remove_all(rowname, coll(" (mean (SD))")),
@@ -87,6 +93,7 @@ my_gt_table1 <- function(.data, strata = NULL, allVars, factorVars = NULL, iqrVa
   grps <- tableOne$CatTable[[1]] %>% names %>% paste0(., " (%)")
 
   gt(tab, rowname_col = "level", groupname_col = "rowname") %>%
-    row_group_order(groups = c(NA, grps))
+    row_group_order(groups = c(NA, grps)) %>%
+    fmt_missing(columns = everything(), missing_text = missing_text)
 }
 

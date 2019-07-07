@@ -8,9 +8,10 @@
 \usage{
 my_df_html(df)
 
-my_gt_table1(.data, strata, allVars, factorVars, iqrVars, contDigits = 1,
-  catDigits = 1, test = FALSE, printToggle = FALSE,
-  noSpaces = TRUE, showAllLevels = TRUE, ...)
+my_gt_table1(.data, strata = NULL, allVars, factorVars = NULL,
+  iqrVars = NULL, contDigits = 1, catDigits = 1, test = FALSE,
+  printToggle = FALSE, noSpaces = TRUE, showAllLevels = TRUE,
+  missing_text = "---", ...)
 }
 \arguments{
 \item{.data}{a dataframe}
@@ -20,6 +21,10 @@ my_gt_table1(.data, strata, allVars, factorVars, iqrVars, contDigits = 1,
 \item{allVars}{a character vector of variables to be rows in the table}
 
 \item{factorVars}{a character vector of factor variables}
+
+\item{iqrVars}{a character vector of variables to calculate median IQR for}
+
+\item{missing_text}{= a string to print instead of NA in the table (default = "---")}
 }
 \description{
 These functions make it easy to print output in an rmarkdown document in a certain way.
