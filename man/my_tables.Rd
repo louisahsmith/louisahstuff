@@ -8,8 +8,9 @@
 \usage{
 my_df_html(df)
 
-my_gt_table1(.data, strata, allVars, factorVars, test = FALSE,
-  printToggle = FALSE, noSpaces = TRUE, showAllLevels = TRUE, ...)
+my_gt_table1(.data, strata, allVars, factorVars, iqrVars, contDigits = 1,
+  catDigits = 1, test = FALSE, printToggle = FALSE,
+  noSpaces = TRUE, showAllLevels = TRUE, ...)
 }
 \arguments{
 \item{.data}{a dataframe}

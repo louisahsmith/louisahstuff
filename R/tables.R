@@ -37,7 +37,8 @@ replace_elem <- function(.data, element, replacement) {
 #' @param allVars a character vector of variables to be rows in the table
 #' @param factorVars a character vector of factor variables
 #' @description Other parameters to `print.TableOne()` can be passed as well
-my_gt_table1 <- function(.data, strata, allVars, factorVars, test = FALSE,
+my_gt_table1 <- function(.data, strata = NULL, allVars, factorVars = NULL, iqrVars = NULL,
+                         contDigits = 1, catDigits = 1, test = FALSE,
                       printToggle = FALSE, noSpaces = TRUE, showAllLevels = TRUE, ...) {
 
   tableOne <- CreateTableOne(vars = allVars, data = .data,
@@ -60,19 +61,28 @@ my_gt_table1 <- function(.data, strata, allVars, factorVars, test = FALSE,
     print(test = test,
           printToggle = printToggle,
           noSpaces = noSpaces,
-          showAllLevels = showAllLevels, ...) %>%
+          showAllLevels = showAllLevels,
+          nonnormal = iqrVars,
+          catDigits = catDigits,
+          contDigits = contDigits,
+          ...) %>%
     as_tibble(rownames = NA) %>%
     rownames_to_column() %>%
-    mutate(rowname = ifelse(rowname == "", NA, rowname),
+    mutate(
+      rowname = ifelse(rowname == "", NA, rowname),
            rowname = str_remove_all(rowname, coll(" (mean (SD))")),
-           level = ifelse(level == "", rowname, level)) %>%
+      rowname = str_remove_all(rowname, coll(" (median [IQR])")),
+           level = ifelse(level == "", rowname, level),
+      IQR = level %in% iqrVars) %>%
     fill(rowname, .direction = "down") %>%
     mutate(rowname = case_when(
       rowname == "n" ~ NA_character_,
-      rowname == level ~ "other characteristics (mean (sd))",
+      rowname == level & !IQR ~ "Other characteristics (mean (SD))",
+      rowname == level ~ "Other characteristics (median [IQR])",
       TRUE ~ rowname
     )) %>%
-    rename_at(vars(starts_with("V")), ~paste("Overall"))
+    rename_at(vars(starts_with("V")), ~paste("Overall")) %>%
+    select(-IQR)
 
   grps <- tableOne$CatTable[[1]] %>% names %>% paste0(., " (%)")
 
