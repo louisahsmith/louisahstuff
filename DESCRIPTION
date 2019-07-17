@@ -1,6 +1,6 @@
 Package: louisahstuff
 Title: Functions, themes, and add-ins to improve my life
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R:
     person(given = "Louisa",
            family = "Smith",
