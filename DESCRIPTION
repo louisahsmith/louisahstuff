@@ -18,4 +18,5 @@ Imports:
     rstudioapi,
     shiny,
     stringr,
-    magrittr
+    magrittr,
+    gt
