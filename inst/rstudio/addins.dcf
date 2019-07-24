@@ -7,3 +7,8 @@ Name: Word to Rmd
 Description: A Shiny gadget that allows conversion of Word documents back to Rmd files with correct references
 Binding: word_to_Rmd
 Interactive: true
+
+Name: Make chunks
+Description: A function that allows a user to easily make highlighted text into an rmarkdown code chunk
+Binding: make_chunk
+Interactive: true
