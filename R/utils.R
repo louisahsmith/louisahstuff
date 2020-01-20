@@ -21,7 +21,7 @@ inherit_beamer_presentation <- function(...) {
 
 find_file <- function(template, file) {
   template <- system.file("rmarkdown", "templates", template, file,
-                          package = "templates")
+                          package = "louisahstuff")
   if (template == "") {
     stop("Couldn't find template file ", template, "/", file, call. = FALSE)
   }
@@ -48,15 +48,15 @@ pdf_document_format <- function(..., format, template = "default", metadata = NU
 
   fmt$pandoc$args <- c(fmt$pandoc$args,
                        "--bibliography",
-                       rmarkdown::pandoc_path_arg(system.file(paste0("rmarkdown/resources/", bibliography, ".bib"), package = "templates")))
+                       rmarkdown::pandoc_path_arg(system.file(paste0("rmarkdown/resources/", bibliography, ".bib"), package = "louisahstuff")))
 
   fmt$pandoc$args <- c(fmt$pandoc$args,
                        "--csl",
-                       rmarkdown::pandoc_path_arg(system.file(paste0("rmarkdown/resources/", bibstyle, ".csl"), package = "templates")))
+                       rmarkdown::pandoc_path_arg(system.file(paste0("rmarkdown/resources/", bibstyle, ".csl"), package = "louisahstuff")))
 
   fmt$pandoc$args <- c(fmt$pandoc$args,
                        "--citation-abbreviations",
-                       rmarkdown::pandoc_path_arg(system.file("rmarkdown/resources/abbreviations.json", package = "templates")))
+                       rmarkdown::pandoc_path_arg(system.file("rmarkdown/resources/abbreviations.json", package = "louisahstuff")))
 
   fmt$pandoc$args <- c(fmt$pandoc$args,
                        "--filter",
@@ -78,15 +78,15 @@ word_document_format <- function(..., format, template = "default", metadata = N
 
   fmt$pandoc$args <- c(fmt$pandoc$args,
                        "--bibliography",
-                       rmarkdown::pandoc_path_arg(system.file(paste0("rmarkdown/resources/", bibliography, ".bib"), package = "templates")))
+                       rmarkdown::pandoc_path_arg(system.file(paste0("rmarkdown/resources/", bibliography, ".bib"), package = "louisahstuff")))
 
   fmt$pandoc$args <- c(fmt$pandoc$args,
                        "--csl",
-                       rmarkdown::pandoc_path_arg(system.file(paste0("rmarkdown/resources/", bibstyle, ".csl"), package = "templates")))
+                       rmarkdown::pandoc_path_arg(system.file(paste0("rmarkdown/resources/", bibstyle, ".csl"), package = "louisahstuff")))
 
   fmt$pandoc$args <- c(fmt$pandoc$args,
                        "--citation-abbreviations",
-                       rmarkdown::pandoc_path_arg(system.file("rmarkdown/resources/abbreviations.json", package = "templates")))
+                       rmarkdown::pandoc_path_arg(system.file("rmarkdown/resources/abbreviations.json", package = "louisahstuff")))
 
   fmt$pandoc$args <- c(fmt$pandoc$args,
                        "--filter",
@@ -115,7 +115,7 @@ beamer_presentation_format <- function(..., format, template = "default", metada
 
   fmt$pandoc$args <- c(fmt$pandoc$args,
                        "--bibliography",
-                       rmarkdown::pandoc_path_arg(system.file("rmarkdown/resources/library.bib", package = "templates")))
+                       rmarkdown::pandoc_path_arg(system.file("rmarkdown/resources/library.bib", package = "louisahstuff")))
 
   fmt
 }
