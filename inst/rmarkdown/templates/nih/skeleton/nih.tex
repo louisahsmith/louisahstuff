@@ -1,0 +1,315 @@
+\documentclass[11pt]{scrartcl}
+
+% \usepackage{palatino} % Palatino font
+\usepackage{helvet} % Helvetica font
+\renewcommand*\familydefault{\sfdefault} % Use the sans serif version of the font
+\usepackage[T1]{fontenc}
+\usepackage[nodisplayskipstretch]{setspace}
+$if(linestretch)$
+\setstretch{$linestretch$}
+$else$
+\setstretch{1.05}
+$endif$
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\pagestyle{empty} % Remove page numbers
+
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+$if(title-meta)$
+            pdftitle={$title-meta$},
+$endif$
+$if(author-meta)$
+            pdfauthor={$author-meta$},
+$endif$
+$if(keywords)$
+            pdfkeywords={$for(keywords)$$keywords$$sep$; $endfor$},
+$endif$
+$if(colorlinks)$
+            colorlinks=true,
+            linkcolor=$if(linkcolor)$$linkcolor$$else$Maroon$endif$,
+            citecolor=$if(citecolor)$$citecolor$$else$Blue$endif$,
+            urlcolor=$if(urlcolor)$$urlcolor$$else$Blue$endif$,
+$else$
+            pdfborder={0 0 0},
+$endif$
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+$if(natbib)$
+\usepackage{natbib}
+$endif$
+$if(biblatex)$
+\usepackage{biblatex}
+$if(biblatexoptions)$\ExecuteBibliographyOptions{$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$}$endif$
+$for(bibliography)$
+\addbibresource{$bibliography$}
+$endfor$
+$endif$
+
+$if(lhs)$
+\lstnewenvironment{code}{\lstset{language=Haskell,basicstyle=\small\ttfamily}}{}
+$endif$
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+$if(verbatim-in-note)$
+\usepackage{fancyvrb}
+\VerbatimFootnotes % allows verbatim text in footnotes
+$endif$
+
+
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+
+$if(links-as-notes)$
+% Make links footnotes instead of hotlinks:
+\renewcommand{\href}[2]{#2\footnote{\url{#1}}}
+$endif$
+$if(strikeout)$
+\usepackage[normalem]{ulem}
+% avoid problems with \sout in headers with hyperref:
+\pdfstringdefDisableCommands{\renewcommand{\sout}{}}
+$endif$
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+$if(numbersections)$
+\setcounter{secnumdepth}{$numbersections$}
+$else$
+\setcounter{secnumdepth}{3}
+$endif$
+$if(subparagraph)$
+$else$
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+$endif$
+
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+
+% \setlength{\parskip}{1.5em}
+\usepackage [autostyle, english = american]{csquotes}
+\MakeOuterQuote{"}
+% \renewcommand{\thesection}{}
+\renewcommand*{\sectionformat}{}
+\renewcommand{\thesubsection}{\Alph{subsection}}
+\renewcommand{\thesubsubsection}{\Alph{subsection}.\arabic{subsubsection}}
+
+\usepackage[table]{xcolor}
+\usepackage{textcomp}
+\usepackage{booktabs}
+\usepackage[margin=$if(margin)$$margin$$else$.5in$endif$, footskip=$if(footskip)$$footskip$$else$.5in$endif$]{geometry}
+\usepackage{float}
+\usepackage{lipsum}
+\usepackage{wrapfig}
+% \usepackage{underscore}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{pgf,tikz}
+\usepackage{tkz-tab}
+% \usepackage[labelformat=simple]{subcaption}
+\usepackage[linewidth = .5pt]{mdframed}
+\usepackage{multirow}
+\usepackage{nicefrac}
+\usepackage[nocompress]{cite}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{bm}
+\usepackage{array}
+\usepackage{anyfontsize}
+\usepackage{bold-extra}
+\usepackage{bibentry}
+\usepackage{longtable}
+\usepackage{pdflscape}
+\usepackage[labelfont=bf]{caption}
+\usepackage{ragged2e}
+% \usepackage{color, colortbl}
+\usepackage{pgf,tikz}
+\usetikzlibrary{positioning, calc, shapes.geometric, shapes.multipart,
+  shapes, arrows.meta, arrows,
+  decorations.markings, external, trees}
+\usepackage{tkz-tab}
+\tikzstyle{observed} = [circle, thick, text centered, draw, minimum height=1in, minimum width=1in, text width=9em, text height = 16pt]
+\tikzstyle{end_text} = [thick, text centered]
+\usepackage{relsize}
+
+\allowdisplaybreaks
+\usepackage[all]{nowidow}
+% \renewenvironment{Shaded}{\begin{singlespace}}{\end{singlespace}}
+
+\setkomafont{title}{\normalfont\upshape\bfseries}
+\setkomafont{section}{\normalfont\large\upshape\bfseries}
+\setkomafont{subsection}{\normalfont\large\upshape\bfseries}
+\setkomafont{subsubsection}{\normalfont\upshape\bfseries}
+% \setlength{\parskip}{0.1mm}
+\setlist[enumerate]{leftmargin=*}
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes}
+\usetikzlibrary{arrows.meta}
+\makeatletter
+\renewcommand*\env@matrix[1][\arraystretch]{%
+  \edef\arraystretch{#1}%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{*\c@MaxMatrixCols c}}
+\makeatother
+
+\newcommand*{\secref}[1]{Section~\ref{#1}}
+
+\renewcommand\paragraph{\newpage}
+
+\newcommand*\xtb{\mathbf{X}_i^T\bm{\beta}}
+
+\newcommand*{\independent}{\!\perp\!\!\!\perp}
+\newcommand*{\notindep}{\not\!\perp\!\!\!\perp}
+
+\newcommand{\E}{{\operatorname E}}
+\newcommand{\Var}{{\operatorname {Var}}}
+\newcommand{\Cov}{{\operatorname {Cov}}}
+\newcommand{\Cor}{{\operatorname {Cor}}}
+
+\newcommand*\pr{\text{P}}
+
+\newcommand*\RRts{\text{RR}^{\text{true}}_{AY |(S = 1)}}
+\newcommand*\RRos{\text{RR}^{\text{obs}}_{AY}}
+
+\newcommand*\RRt{\text{RR}^{\text{true}}_{AY}}
+\newcommand*\RRo{\text{RR}^{\text{obs}}_{AY}}
+
+\newcommand*\RDts{\text{RD}^{\text{true}}_{AY |(S = 1)}}
+\newcommand*\RDos{\text{RD}^{\text{obs}}_{AY}}
+
+\newcommand*\RDt{\text{RD}^{\text{true}}_{AY}}
+\newcommand*\RDo{\text{RD}^{\text{obs}}_{AY}}
+
+\newcommand*\RRuyaa{\text{RR}_{UY |(A = 0)}}
+\newcommand*\RRuyab{\text{RR}_{UY |(A = 1)}}
+\newcommand*\RRsuaa{\text{RR}_{SU |(A = 0)}}
+\newcommand*\RRsuab{\text{RR}_{SU |(A = 1)}}
+
+\newcommand*\RRuys{\text{RR}_{UY |(S = 1)}}
+\newcommand*\RRaus{\text{RR}_{AU |(S = 1)}}
+
+\newcommand*{\TitleFont}{%
+      % \usefont{\encodingdefault}{\rmdefault}{b}{n}%
+      \fontsize{16}{12}%
+      \selectfont}
+\newcommand*{\AuthFont}{%
+      % \usefont{\encodingdefault}{\rmdefault}{}{n}%
+      \fontsize{14}{12}%
+      \selectfont}
+
+
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+
+$if(dir)$
+\ifxetex
+  % load bidi as late as possible as it modifies e.g. graphicx
+  $if(latex-dir-rtl)$
+  \usepackage[RTLdocument]{bidi}
+  $else$
+  \usepackage{bidi}
+  $endif$
+\fi
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \TeXXeTstate=1
+  \newcommand{\RL}[1]{\beginR #1\endR}
+  \newcommand{\LR}[1]{\beginL #1\endL}
+  \newenvironment{RTL}{\beginR}{\endR}
+  \newenvironment{LTR}{\beginL}{\endL}
+\fi
+$endif$
+
+$if(parindent)$
+\setlength{\parindent}{parindent}
+$else$
+\setlength{\parindent}{5mm}
+$endif$
+
+$if(parskip)$
+\setlength{\parskip}{$parskip$}
+$else$
+\setlength{\parskip}{0mm}
+$endif$
+
+\usepackage{indentfirst}
+
+% \renewcommand\thesubfigure{(\alph{subfigure})}
+
+
+\begin{document}
+
+$for(include-before)$
+$include-before$
+
+$endfor$
+$if(toc)$
+{
+$if(colorlinks)$
+\hypersetup{linkcolor=$if(toccolor)$$toccolor$$else$black$endif$}
+$endif$
+\setcounter{tocdepth}{$toc-depth$}
+\tableofcontents
+}
+\newpage
+$endif$
+$if(lot)$
+\listoftables
+$endif$
+$if(lof)$
+\listoffigures
+$endif$
+$body$
+
+$if(natbib)$
+$if(bibliography)$
+$if(biblio-title)$
+$if(book-class)$
+\renewcommand\bibname{$biblio-title$}
+$else$
+\renewcommand\refname{$biblio-title$}
+$endif$
+$endif$
+\bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
+
+$endif$
+$endif$
+$if(biblatex)$
+\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+
+$endif$
+$for(include-after)$
+$include-after$
+
+$endfor$
+
+\end{document}

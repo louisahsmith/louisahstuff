@@ -1,0 +1,6 @@
+---
+title: "Manuscript"
+output:
+  templates::epidemiology:
+    type: pdf
+---

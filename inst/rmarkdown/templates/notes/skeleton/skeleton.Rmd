@@ -1,0 +1,4 @@
+---
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+output: templates::notes
+---

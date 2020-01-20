@@ -1,0 +1,281 @@
+% !TeX program = XeLaTeX
+
+% run this before compiling if glossary not showing up/complete:
+% makeindex -s probstat_slides.ist -o probstat_slides.gls probstat_slides.glo
+
+\documentclass[$if(handout)$handout,$endif$$if(widescreen)$aspectratio = 169,$endif$  13.5pt]{beamer}
+
+\input{config/presento.sty}
+
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+% \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setkeys{Gin}{keepaspectratio}
+
+\usepackage{textpos}
+\setlength{\TPHorizModule}{1cm}
+\setlength{\TPVertModule}{1cm}
+\usepackage [autostyle, english = american]{csquotes}
+\MakeOuterQuote{"}
+\newcommand\crule[1][black]{\textcolor{#1}{\rule{2cm}{2cm}}}
+\def\tightlist{}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+% \usepackage{underscore}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{nicefrac}
+\usepackage{bm}
+\usepackage{pgf,tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes}
+\usetikzlibrary{arrows.meta}
+\usepackage{tkz-tab}
+\usepackage[labelformat=simple]{subcaption}
+\renewcommand\thesubfigure{(\alph{subfigure})}
+
+\usepackage[framemethod=TikZ]{mdframed}
+
+\mdfdefinestyle{statement}{backgroundcolor = colorgreen!30, fontcolor = colorhgray!75, roundcorner=5pt, font = \montserratfont\raggedright, hidealllines = true}
+
+
+\usepackage{etoolbox}
+
+\usepackage{media9}
+
+\AtBeginDocument{%
+  \letcs\oig{@orig\string\includegraphics}%
+  \renewcommand<>\includegraphics[2][]{%
+    \only#3{%
+      {\centering\oig[{#1}]{#2}\par}%
+    }%
+  }%
+}
+
+\newif\ifbibliography
+% \usepackage{natbib}
+% \bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
+\usepackage[$if(biblio-style)$bibstyle=$biblio-style$$else$bibstyle=nejm$endif$,$if(cite-style)$citestyle=$cite-style$$else$citestyle=ext-authoryear$endif$,$for(biblatexoptions)$$biblatexoptions$$sep$$endfor$, maxbibnames = 3, maxcitenames = 1, mincitenames = 1, url = false, doi = false, isbn = false]{biblatex}
+$for(bibliography)$
+\addbibresource{$bibliography$}
+$endfor$
+\renewcommand*{\nameyeardelim}{\addcomma\space}
+
+\usepackage{hyperref}
+
+\DeclareOuterCiteDelim{cite}{\color{colordgray}{\bibopenbracket}}{\color{colordgray}{\bibclosebracket}}
+\DeclareOuterCiteDelim{textcite}{\color{colordgray}{\bibopenbracket}}{\color{colordgray}{\bibclosebracket}}
+\DeclareOuterCiteDelim{parencite}{\color{colordgray}{\bibopenbracket}}{\color{colordgray}{\bibclosebracket}}
+
+\DeclareFieldFormat{citehyperref}{%
+  \DeclareFieldAlias{bibhyperref}{noformat}% Avoid nested links
+  \bibhyperref{#1}}
+
+\DeclareFieldFormat{textcitehyperref}{%
+  \DeclareFieldAlias{bibhyperref}{noformat}% Avoid nested links
+  \bibhyperref{%
+    #1%
+    \ifbool{cbx:parens}
+      {\bibcloseparen\global\boolfalse{cbx:parens}}
+      {}}}
+
+\savebibmacro{cite}
+\savebibmacro{textcite}
+\savebibmacro{autocite}
+
+\renewbibmacro*{cite}{%
+  \printtext[citehyperref]{%
+    \restorebibmacro{cite}%
+    \usebibmacro{cite}}}
+
+\renewbibmacro*{textcite}{%
+  \ifboolexpr{
+    ( not test {\iffieldundef{prenote}} and
+      test {\ifnumequal{\value{citecount}}{1}} )
+    or
+    ( not test {\iffieldundef{postnote}} and
+      test {\ifnumequal{\value{citecount}}{\value{citetotal}}} )
+  }
+    {\DeclareFieldAlias{textcitehyperref}{noformat}}
+    {}%
+  \printtext[textcitehyperref]{%
+    \restorebibmacro{textcite}%
+    \usebibmacro{textcite}}}
+
+\renewbibmacro*{autocite}{%
+  \printtext[citehyperref]{%
+    \restorebibmacro{autocite}%
+    \usebibmacro{autocite}}}
+
+\AtBeginBibliography{\footnotesize}
+
+\hypersetup{colorlinks,linkcolor=,urlcolor=colororange, citecolor = colordgray}
+
+\usefonttheme[onlymath]{serif}
+\setbeamercolor{section in toc}{fg=colorgreen}
+\setbeamercolor{subsection in toc}{fg=colordgray}
+\setbeamercolor{subsection in toc}{fg=colordgray}
+\setbeamercolor{normal text}{fg=colorhgray}
+\setbeamercolor{caption text}{fg=colordgray}
+\setbeamercolor{caption name}{fg=colororange}
+
+\setbeamercolor{bibliography entry author}{fg=colorgreen}
+\setbeamercolor{bibliography entry year}{fg=colorgreen}
+\setbeamercolor{bibliography entry date}{fg=colorgreen}
+
+\setbeamercolor{bibliography entry title}{fg=colorhgray}
+\setbeamercolor{bibliography entry note}{fg=colorhgray}
+\setbeamercolor{bibliography entry journal}{fg=colorhgray}
+\setbeamercolor{bibliography entry booktitle}{fg=colorhgray}
+\setbeamercolor{bibliography entry location}{fg=colorhgray}
+\setbeamertemplate{bibliography item}[triangle]
+\setbeamercolor{bibliography item}{fg=colororange}
+
+\setbeamercolor{item}{fg=colororange}
+\setbeamercolor{alert}{fg=colorgreen}
+
+\setbeamertemplate{itemize subitem}[circle]
+
+\setbeamerfont{itemize/enumerate subbody}{size=\small}
+
+%\captionsetup{textfont=colordgray,labelfont=colororange}
+\setbeamertemplate{frametitle continuation}{}
+
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+\renewenvironment{block}
+    {\bfseries}
+    {\notosansfont}
+    {\color{colorhgray}}
+
+\makeatletter
+\tikzoption{base font}{\def\tikz@base@textfont{#1}}
+\tikzoption{font}{\def\tikz@textfont{\tikz@base@textfont#1}}
+\tikzset{
+      base font=\sffamily,
+      draw=colorhgray
+}
+
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\@listI}{\itemsep3\p@}{\itemsep1em}{}{}
+\makeatother
+
+\newcommand{\E}{{\operatorname E}}
+\newcommand{\Var}{{\operatorname {Var}}}
+\newcommand{\Cov}{{\operatorname {Cov}}}
+\newcommand{\Cor}{{\operatorname {Cor}}}
+
+\newcommand*{\independent}{\!\perp\!\!\!\perp}
+
+
+\newcommand*\pr{\text{Pr}}
+
+\newcommand*\RRts{\text{RR}^{\text{true}}_{AY |(S = 1)}}
+\newcommand*\RRos{\text{RR}^{\text{obs}}_{AY}}
+
+\newcommand*\RRt{\text{RR}^{\text{true}}_{AY}}
+\newcommand*\RRo{\text{RR}^{\text{obs}}_{AY}}
+
+\newcommand*\RDts{\text{RD}^{\text{true}}_{AY |(S = 1)}}
+\newcommand*\RDos{\text{RD}^{\text{obs}}_{AY}}
+
+\newcommand*\RDt{\text{RD}^{\text{true}}_{AY}}
+\newcommand*\RDo{\text{RD}^{\text{obs}}_{AY}}
+
+\newcommand*\RRuyaa{\text{RR}_{UY |(A = 0)}}
+\newcommand*\RRuyab{\text{RR}_{UY |(A = 1)}}
+\newcommand*\RRsuaa{\text{RR}_{SU |(A = 0)}}
+\newcommand*\RRsuab{\text{RR}_{SU |(A = 1)}}
+
+\newcommand*\RRuys{\text{RR}_{UY |(S = 1)}}
+\newcommand*\RRaus{\text{RR}_{AU |(S = 1)}}
+
+\newcommand{\myTitle}{\color{colorblue}\hugetext{$if(title)$$title$$endif$}}
+\newcommand{\mySubtitle}{\color{colorblue}\montserratfont\largetext{$if(subtitle)$$subtitle$$endif$}}
+\newcommand{\myName}{\largetext{\color{colororange}{$if(name)$$name$$endif$}}}
+\newcommand{\myInstitution}{\setnote{\textcolor{colororange}{$if(institution)$$institution$$endif$}}}
+\newcommand{\myDate}{\setnote{\textcolor{colorgreen}{$if(date)$$date$$endif$}}}
+\newcommand{\myOccasion}{\setnote{\textcolor{colorgreen}{$if(occasion)$$occasion$$endif$}}}
+
+\begin{document}
+$if(title)$
+\begin{frame}[plain]
+  \vfill
+    \myTitle
+    \mySubtitle
+    \vfill
+    \myName
+    \myInstitution
+     \vfill
+    \myDate
+
+    \myOccasion
+    \vfill
+\addtocounter{framenumber}{-1}
+\addtocounter{page}{-1}
+\end{frame}
+$endif$
+
+$for(include-before)$
+$include-before$
+$endfor$
+
+$if(toc)$
+\begin{frame}
+\tableofcontents[hideallsubsections]
+\end{frame}
+$endif$
+
+$body$
+
+% $if(bibliography)$
+% $if(biblio-title)$
+% $if(book-class)$
+% \renewcommand\bibname{$biblio-title$}
+% $else$
+% \renewcommand\refname{$biblio-title$}
+% $endif$
+% $endif$
+% \begin{frame}[allowframebreaks]{$biblio-title$}
+% \bibliographytrue
+% \bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
+% \end{frame}
+% $endif$
+
+$if(nobib)$
+$else$
+\begin{frame}[plain,allowframebreaks]{$if(biblio-title)$$biblio-title$$else$References$endif$}
+\bibliographytrue
+\printbibliography[heading=none]
+$for(bibpages)$
+\addtocounter{framenumber}{-$bibpages$}
+\addtocounter{page}{-$bibpages$}
+$sep$
+$endfor$
+\end{frame}
+$endif$
+
+% $if(references)$
+% \begin{frame}[plain, allowframebreaks]{References}
+% \bibliographystyle{/config/epi-custom}
+% \bibliography{/config/library}
+% % \bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
+% $for(bibpages)$
+% \addtocounter{framenumber}{-$bibpages$}
+% \addtocounter{page}{-$bibpages$}
+% $sep$
+% $endfor$
+% \end{frame}
+% $endif$
+
+$for(include-after)$
+$include-after$
+$endfor$
+
+\end{document}

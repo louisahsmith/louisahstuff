@@ -1,0 +1,4 @@
+name: NIH
+description: >
+ Template for NIH grant
+create_dir: false

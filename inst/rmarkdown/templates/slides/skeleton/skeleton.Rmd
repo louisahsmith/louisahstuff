@@ -1,0 +1,9 @@
+---
+name: Louisa Smith
+title: "Presentation"
+subtitle: "Subtitle"
+institution: "Harvard"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+bibpages: 1
+output: templates::slides
+---

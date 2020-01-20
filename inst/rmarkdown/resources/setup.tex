@@ -1,0 +1,84 @@
+\documentclass[11pt]{scrartcl}
+
+\renewcommand{\thesection}{\Roman{section}} 
+\renewcommand{\thesubsection}{\alph{subsection}} 
+\usepackage[table]{xcolor}
+\usepackage{textcomp}
+\usepackage{booktabs}
+\usepackage[margin=1in, footskip=.5in, paperwidth=8.5in,paperheight=11.0in]{geometry}
+\usepackage{float}
+\usepackage{lipsum}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{underscore}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{pgf,tikz}
+\usepackage{tkz-tab}
+\usepackage[labelformat=simple]{subcaption}
+\usepackage[linewidth = .5pt]{mdframed}
+\usepackage{multirow}
+\usepackage{nicefrac}
+\usepackage[nocompress]{cite}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{bm}
+\usepackage{array}
+\usepackage{anyfontsize}
+\usepackage{bold-extra}
+\usepackage{bibentry}
+\usepackage{longtable}
+\usepackage{pdflscape}
+%\usepackage[labelfont=bf]{caption}
+\usepackage{ragged2e}
+% \usepackage{color, colortbl}
+\usepackage{pgf,tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes}
+\usetikzlibrary{arrows.meta}
+\usepackage{tkz-tab}
+\usepackage[labelformat=simple]{subcaption}
+\renewcommand\thesubfigure{(\alph{subfigure})}
+
+
+\setkomafont{title}{\normalfont\upshape\bfseries}
+\setkomafont{section}{\normalfont\large\upshape\bfseries}
+\setkomafont{subsection}{\normalfont\upshape\bfseries}
+% \setlength{\parskip}{0.1mm}
+\setlist[enumerate]{leftmargin=*}
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes}
+\usetikzlibrary{arrows.meta}
+\renewcommand\thesubfigure{(\alph{subfigure})}
+\makeatletter
+\renewcommand*\env@matrix[1][\arraystretch]{%
+  \edef\arraystretch{#1}%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{*\c@MaxMatrixCols c}}
+\makeatother
+
+
+
+% math things
+\newcommand*\xtb{\mathbf{X}_i^T\bm{\beta}}
+
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern5mu{#1#2}}}
+\newcommand*{\notindep}{\not\!\perp\!\!\!\perp}
+
+\newcommand{\E}{{\operatorname E}}
+\newcommand{\Var}{{\operatorname {Var}}}
+\newcommand{\Cov}{{\operatorname {Cov}}}
+\newcommand{\Cor}{{\operatorname {Cor}}}
+
+
+\newcommand*{\TitleFont}{%
+      % \usefont{\encodingdefault}{\rmdefault}{b}{n}%
+      \fontsize{14}{12}%
+      \selectfont}
+\newcommand*{\AuthFont}{%
+      % \usefont{\encodingdefault}{\rmdefault}{}{n}%
+      \fontsize{12}{12}%
+      \selectfont}
