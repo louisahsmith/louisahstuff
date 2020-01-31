@@ -91,9 +91,10 @@ my_gt_table1 <- function(.data, strata = NULL, allVars, factorVars = NULL, iqrVa
     select(-IQR)
 
   grps <- tableOne$CatTable[[1]] %>% names %>% paste0(., " (%)")
+  tab$rowname[is.na(tab$rowname)] <- ""
 
   gt(tab, rowname_col = "level", groupname_col = "rowname") %>%
-    row_group_order(groups = c(NA, grps)) %>%
+    row_group_order(groups = c("", grps)) %>%
     fmt_missing(columns = everything(), missing_text = missing_text)
 }
 
