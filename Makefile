@@ -2,11 +2,12 @@
 PKGNAME := $(shell sed -n "s/Package: *\([^ ]*\)/\1/p" DESCRIPTION)
 PKGVERS := $(shell sed -n "s/Version: *\([^ ]*\)/\1/p" DESCRIPTION)
 
-all: bib build install clean
+all: clean
 
 bib:
 	cd inst/rmarkdown/resources;\
-	./mendeleyBibFix
+	./mendeleyBibFix;\
+	open library_fixed.bib
 
 build:
 	cd ..;\
