@@ -58,9 +58,15 @@ pdf_document_format <- function(..., format, template = "default", metadata = NU
                        "--citation-abbreviations",
                        rmarkdown::pandoc_path_arg(system.file("rmarkdown/resources/abbreviations.json", package = "louisahstuff")))
 
+  if(Sys.info()[["user"]] == "lousmi") {
+    crossref_loc <- "//freja/homedir/lousmi/Documents/pandoc-crossref.exe"
+  } else {
+    crossref_loc <- "/usr/local/bin/pandoc-crossref"
+  }
+
   fmt$pandoc$args <- c(fmt$pandoc$args,
                        "--filter",
-                       "/usr/local/bin/pandoc-crossref")
+                       crossref_loc)
   # return format
   fmt
 }
