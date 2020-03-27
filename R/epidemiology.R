@@ -25,5 +25,13 @@ epidemiology <- function(..., metadata = NULL, type = "pdf") {
                         bibstyle = "epidemiology",
                       bibliography = "library_fixed"))
   }
-  if(!type %in% c("pdf", "word")) stop("Other formats not yet supported")
+  if(type == "reports") {
+    return(word_document_format(...,
+                                format = "epidemiology",
+                                template = "epidemiology.docx",
+                                metadata = metadata,
+                                bibstyle = "reports",
+                                bibliography = "library_fixed"))
+  }
+  if(!type %in% c("pdf", "word", "reports")) stop("Other formats not yet supported")
 }
