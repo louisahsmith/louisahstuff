@@ -7,11 +7,23 @@
 \alias{my_theme}
 \title{Customize ggplot}
 \usage{
-my_scale_color(type = "div", data = "cont", other = FALSE,
-  bw = FALSE, direction = 1, ...)
+my_scale_color(
+  type = "div",
+  data = "cont",
+  other = FALSE,
+  bw = FALSE,
+  direction = 1,
+  ...
+)
 
-my_scale_fill(type = "div", data = "cont", other = FALSE,
-  bw = FALSE, direction = 1, ...)
+my_scale_fill(
+  type = "div",
+  data = "cont",
+  other = FALSE,
+  bw = FALSE,
+  direction = 1,
+  ...
+)
 
 my_theme(..., font = TRUE, axis = "c")
 }
