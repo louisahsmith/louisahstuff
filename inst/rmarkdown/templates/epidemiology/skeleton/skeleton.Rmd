@@ -1,6 +1,6 @@
 ---
 title: "Manuscript"
 output:
-  templates::epidemiology:
+  louisahstuff::epidemiology:
     type: pdf
 ---

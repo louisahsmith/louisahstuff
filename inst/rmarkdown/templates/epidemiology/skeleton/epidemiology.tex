@@ -186,15 +186,24 @@ $endif$
 \newcommand{\Cor}{{\operatorname {Cor}}}
 
 \newcommand*\pr{\text{P}}
+\newcommand{\RR}[1]{\text{RR}_{#1}}
+\newcommand{\OR}[1]{\text{OR}_{#1}}
+\newcommand{\Prc}[2]{\Pr\left({#1}\mid{#2}\right)}
+\newcolumntype{P}[1]{>{\RaggedRight\hspace{0pt}}p{#1}}
 
 \newcommand*{\TitleFont}{%
       % \usefont{\encodingdefault}{\rmdefault}{b}{n}%
-      \fontsize{16}{12}%
+      \fontsize{18}{12}%
       \selectfont
       \centering}
 \newcommand*{\AuthFont}{%
       % \usefont{\encodingdefault}{\rmdefault}{}{n}%
       \fontsize{14}{12}%
+      \selectfont
+      \centering}
+\newcommand*{\InstFont}{%
+      % \usefont{\encodingdefault}{\rmdefault}{}{n}%
+      \fontsize{12}{12}%
       \selectfont
       \centering}
 
@@ -258,13 +267,24 @@ $if(name)$
   \vspace{-.5ex}
 $endif$
 
+$if(institution)$
+ \InstFont{
+$institution$
+}
+$endif$
+
 \end{center}
 
 $if(abstract)$
 \begin{abstract}
 $abstract$
 \end{abstract}
-\newpage
+$endif$
+
+$if(title-page)$
+\thispagestyle{empty}
+\clearpage
+\pagenumbering{arabic}
 $endif$
 
 $for(include-before)$
