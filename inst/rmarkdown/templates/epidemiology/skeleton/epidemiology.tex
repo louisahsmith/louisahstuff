@@ -7,7 +7,11 @@ $else$
 $endif$
 \usepackage{ifxetex,ifluatex}
 \usepackage{fixltx2e} % provides \textsubscript
-
+% for code output backgrounds
+\usepackage{etoolbox}
+% for code output backgrounds
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
 % use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 % use microtype if available
@@ -34,7 +38,7 @@ $if(colorlinks)$
 $else$
             pdfborder={0 0 0},
 $endif$
-            breaklinks=true}
+            breaklinks=false}
 \urlstyle{same}  % don't use monospace font for urls
 $if(natbib)$
 \usepackage{natbib}
@@ -53,6 +57,9 @@ $endif$
 $if(highlighting-macros)$
 $highlighting-macros$
 $endif$
+
+\usepackage{fancyvrb}
+\usepackage{fvextra}
 $if(verbatim-in-note)$
 \usepackage{fancyvrb}
 \VerbatimFootnotes % allows verbatim text in footnotes
@@ -110,10 +117,10 @@ $endif$
 \usepackage [autostyle, english = american]{csquotes}
 \MakeOuterQuote{"}
 \renewcommand{\thesection}{\arabic{section}}
-\renewcommand{\thesubsection}{\arabic{section}. \alph{subsection}}
-\renewcommand{\thesubsubsection}{\arabic{section}. \alph{subsection}. \roman{subsubsection}}
+\renewcommand{\thesubsection}{\arabic{section}\alph{subsection}}
+\renewcommand{\thesubsubsection}{\arabic{section}\alph{subsection}\roman{subsubsection}}
 
-\usepackage[table]{xcolor}
+\usepackage{xcolor}
 \usepackage{textcomp}
 \usepackage{booktabs}
 \usepackage[margin=$if(margin)$$margin$$else$1in$endif$, footskip=$if(footskip)$$footskip$$else$.5in$endif$]{geometry}
@@ -171,6 +178,137 @@ $endif$
   \array{*\c@MaxMatrixCols c}}
 \makeatother
 
+
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifxetex
+  \usepackage{fontspec,xltxtra,xunicode}
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\else
+  \ifluatex
+    \usepackage{fontspec}
+    \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \else
+    \usepackage[utf8]{inputenc}
+  \fi
+\fi
+
+% code highlighting colors
+\definecolor{keyword}{HTML}{$if(keyword-color)$$keyword-color$$else$1b6ca2$endif$}
+\definecolor{argument}{HTML}{$if(keyword-color)$$keyword-color$$else$2d9027$endif$}
+\definecolor{flow}{HTML}{$if(flow-color)$$flow-color$$else$ff7f00$endif$}
+\definecolor{number}{HTML}{$if(number-color)$$number-color$$else$e31a1c$endif$}
+\definecolor{variable}{HTML}{$if(variable-color)$$variable-color$$else$b15928$endif$}
+\definecolor{function}{HTML}{$if(function-color)$$keyword-color$$else$1f78b4$endif$}
+\definecolor{text}{HTML}{$if(text-color)$$text-color$$else$4b4b4b$endif$}
+\definecolor{string}{HTML}{$if(string-color)$$string-color$$else$6a3d9a$endif$}
+\definecolor{comment}{HTML}{$if(comment-color)$$comment-color$$else$a2a2a2$endif$}
+\definecolor{operator}{HTML}{$if(operator-color)$$operator-color$$else$ff7f00$endif$}
+\definecolor{logical}{HTML}{$if(logical-color)$$logical-color$$else$e31a1c$endif$}
+\definecolor{warning}{HTML}{$if(warning-color)$$warning-color$$else$e31a1c$endif$}
+\definecolor{alert}{HTML}{$if(alert-color)$$alert-color$$else$e31a1c$endif$}
+\definecolor{error}{HTML}{$if(error-color)$$error-color$$else$e31a1c$endif$}
+% for code output
+\definecolor{shadecolor}{HTML}{$if(shade-color)$$shadecolor-color$$else$f8f8f8$endif$}
+\definecolor{sidecolor}{HTML}{$if(side-color)$$sidecolor-color$$else$717171$endif$}
+
+$if(no-highlighting)$
+\definecolor{keyword}{gray}{0}
+\definecolor{argument}{gray}{0}
+\definecolor{flow}{gray}{0}
+\definecolor{number}{gray}{0}
+\definecolor{variable}{gray}{0}
+\definecolor{function}{gray}{0}
+\definecolor{text}{gray}{0}
+\definecolor{string}{gray}{0}
+\definecolor{comment}{gray}{0}
+\definecolor{operator}{gray}{0}
+\definecolor{logical}{gray}{0}
+\definecolor{warning}{gray}{0}
+\definecolor{alert}{gray}{0}
+\definecolor{error}{gray}{0}
+% for code output
+\definecolor{shadecolor}{gray}{1}
+\definecolor{sidecolor}{gray}{1}
+$endif$
+
+% define environments for R code and output
+\DefineShortVerb[commandchars=\\\{\}]{\|}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}, formatcom={\setstretch{$if(code-stretch)$$code-stretch$$else$1.2$endif$} \color{text}}}
+
+% code
+\renewenvironment{Shaded}{\begin{tcolorbox}[
+    breakable,
+    colback=shadecolor,
+    colframe=shadecolor,
+    coltext=text,
+    boxsep=-3pt,
+    bottom=-8pt,
+    oversize,
+    sharp corners=all,
+    before skip=12pt,
+    after skip=12pt,
+    height fixed for=first and middle
+  ]%
+  }{\end{tcolorbox}}
+% break long code lines and indent after
+\fvset{breaksymbolleft={}, breakautoindent=true, breakindentnchars=4}
+
+% output
+\renewenvironment{verbatim}
+ {\VerbatimEnvironment
+  \begin{tcolorbox}[
+  enhanced,
+    breakable,
+    colback=shadecolor,
+    colframe=shadecolor,
+    coltext=text,
+    boxsep=-3pt,
+    oversize,
+    sharp corners=all,
+    borderline west={2pt}{0pt}{sidecolor},
+    after skip = 12pt,
+    height fixed for=first and middle
+  ]%
+    \begin{Verbatim}[breaklines,formatcom={\setstretch{$if(code-stretch)$$code-stretch$$else$1.2$endif$}}]}
+    {\end{Verbatim}\end{tcolorbox}}
+%
+
+% set the R output to appropriate colors
+\renewcommand{\KeywordTok}[1]{\textcolor{keyword}{#1}}
+\renewcommand{\DataTypeTok}[1]{\textcolor{argument}{#1}}
+\renewcommand{\DecValTok}[1]{\textcolor{number}{#1}}
+\renewcommand{\BaseNTok}[1]{\textcolor{number}{#1}}
+\renewcommand{\FloatTok}[1]{\textcolor{number}{#1}}
+\renewcommand{\ConstantTok}[1]{\textcolor{variable}{#1}}
+\renewcommand{\CharTok}[1]{\textcolor{string}{#1}}
+\renewcommand{\SpecialCharTok}[1]{\textcolor{variable}{#1}}
+\renewcommand{\StringTok}[1]{\textcolor{string}{#1}}
+\renewcommand{\VerbatimStringTok}[1]{\textcolor{string}{#1}}
+\renewcommand{\SpecialStringTok}[1]{\textcolor{string}}
+\renewcommand{\ImportTok}[1]{#1}
+\renewcommand{\CommentTok}[1]{\textcolor{comment}{\textit{#1}}}
+\renewcommand{\DocumentationTok}[1]{\textcolor{comment}{\textbf{\textit{#1}}}}
+\renewcommand{\AnnotationTok}[1]{\textcolor{comment}{\textbf{\textit{#1}}}}
+\renewcommand{\CommentVarTok}[1]{\textcolor{comment}{\textbf{\textit{#1}}}}
+\renewcommand{\OtherTok}[1]{\textcolor{logical}{#1}}
+\renewcommand{\FunctionTok}[1]{\textcolor{function}{#1}}
+\renewcommand{\VariableTok}[1]{\textcolor{variable}{#1}}
+\renewcommand{\ControlFlowTok}[1]{\textcolor{flow}{\textbf{#1}}}
+\renewcommand{\OperatorTok}[1]{\textcolor{operator}{\textbf{#1}}}
+\renewcommand{\BuiltInTok}[1]{#1}
+\renewcommand{\ExtensionTok}[1]{#1}
+\renewcommand{\PreprocessorTok}[1]{\textcolor{comment}{\textit{#1}}}
+\renewcommand{\AttributeTok}[1]{\textcolor{logical}{#1}}
+\renewcommand{\RegionMarkerTok}[1]{#1}
+\renewcommand{\InformationTok}[1]{\textcolor{comment}{\textbf{\textit{#1}}}}
+\renewcommand{\WarningTok}[1]{\textcolor{warning}{\textbf{\textit{#1}}}}
+\renewcommand{\AlertTok}[1]{\textcolor{alert}{#1}}
+\renewcommand{\ErrorTok}[1]{\textcolor{error}{\textbf{#1}}}
+\renewcommand{\NormalTok}[1]{\textcolor{text}{#1}}
+
+
 \newcommand*{\secref}[1]{Section~\ref{#1}}
 
 \renewcommand\paragraph{\newpage}
@@ -206,8 +344,6 @@ $endif$
       \fontsize{12}{12}%
       \selectfont
       \centering}
-
-\usepackage{widebar}
 
 $for(header-includes)$
 $header-includes$

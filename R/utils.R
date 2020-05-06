@@ -1,13 +1,13 @@
 # Call rmarkdown::pdf_document and mark the return value as inheriting pdf_document
 inherit_pdf_document <- function(...) {
-  fmt <- rmarkdown::pdf_document(...)
+  fmt <- bookdown::pdf_document2(...)
   fmt$inherits <- "pdf_document"
   fmt
 }
 
 # Call rmarkdown::word_document and mark the return value as inheriting word_document
 inherit_word_document <- function(...) {
-  fmt <- rmarkdown::word_document(...)
+  fmt <- bookdown::word_document2(...)
   fmt$inherits <- "word_document"
   fmt
 }
@@ -57,6 +57,9 @@ pdf_document_format <- function(..., format, template = "default", metadata = NU
   fmt$pandoc$args <- c(fmt$pandoc$args,
                        "--citation-abbreviations",
                        rmarkdown::pandoc_path_arg(system.file("rmarkdown/resources/abbreviations.json", package = "louisahstuff")))
+
+  # fmt$pandoc$args <- c(fmt$pandoc$args,
+  #                      "--no-highlight")
 
   if(Sys.info()[["user"]] == "lousmi") {
     crossref_loc <- "//freja/homedir/lousmi/Documents/pandoc-crossref.exe"

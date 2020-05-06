@@ -1,6 +1,6 @@
 homework <- function(..., metadata = NULL) {
   #if(type == "pdf"){
-    pdf_document_format(...,
+    bookdown::pdf_document_format2(...,
                         format = "homework",
                         template = "homework.tex",
                         metadata = metadata)
