@@ -1,6 +1,6 @@
 homework <- function(..., metadata = NULL) {
   #if(type == "pdf"){
-    bookdown::pdf_document_format2(...,
+    pdf_document_format(...,
                         format = "homework",
                         template = "homework.tex",
                         metadata = metadata)
@@ -59,6 +59,14 @@ epidemiology <- function(..., metadata = NULL, type = "pdf") {
                         bibstyle = "epidemiology",
                       bibliography = "library_fixed"))
   }
+  if(type == "redoc"){
+    return(redoc_document_format(...,
+                                format = "epidemiology",
+                                template = "epidemiology.docx",
+                                metadata = metadata,
+                                bibstyle = "epidemiology",
+                                bibliography = "library_fixed"))
+  }
   if(type == "reports") {
     return(word_document_format(...,
                                 format = "epidemiology",
@@ -67,5 +75,5 @@ epidemiology <- function(..., metadata = NULL, type = "pdf") {
                                 bibstyle = "reports",
                                 bibliography = "library_fixed"))
   }
-  if(!type %in% c("pdf", "word", "reports")) stop("Other formats not yet supported")
+  # if(!type %in% c("pdf", "word", "reports")) stop("Other formats not yet supported")
 }

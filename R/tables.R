@@ -2,7 +2,7 @@
 #'
 #' @description These functions make it easy to print output in an rmarkdown document in a certain way.
 #' @import knitr
-#' @import kableExtra
+#' @importFrom kableExtra kable_styling row_spec
 #' @import tableone
 #' @import gt
 #' @import dplyr

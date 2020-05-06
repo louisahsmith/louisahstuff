@@ -238,6 +238,7 @@ $endif$
 \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}, formatcom={\setstretch{$if(code-stretch)$$code-stretch$$else$1.2$endif$} \color{text}}}
 
 % code
+$if(code)$
 \renewenvironment{Shaded}{\begin{tcolorbox}[
     breakable,
     colback=shadecolor,
@@ -307,7 +308,7 @@ $endif$
 \renewcommand{\AlertTok}[1]{\textcolor{alert}{#1}}
 \renewcommand{\ErrorTok}[1]{\textcolor{error}{\textbf{#1}}}
 \renewcommand{\NormalTok}[1]{\textcolor{text}{#1}}
-
+$endif$
 
 \newcommand*{\secref}[1]{Section~\ref{#1}}
 
