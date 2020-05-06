@@ -14,10 +14,10 @@ inherit_word_document <- function(...) {
   fmt
 }
 
-#' @importFrom redoc redoc
+#' @import redoc
 # Call rmarkdown::word_document and mark the return value as inheriting word_document
 inherit_redoc_document <- function(...) {
-  fmt <- redoc::redoc(...)
+  fmt <- redoc::redoc(..., wrappers = list(latexwrap, citationwrap, rawblockwrap, rawspanwrap))
   fmt$inherits <- "redoc_document"
   fmt
 }
