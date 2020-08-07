@@ -12,3 +12,8 @@ Name: Make chunks
 Description: A function that allows a user to easily make highlighted text into an rmarkdown code chunk
 Binding: make_chunk
 Interactive: true
+
+Name: Dollar signs
+Description: Surround a selection with dollar signs (e.g., for writing math in latex)
+Binding: dollar
+Interactive: true

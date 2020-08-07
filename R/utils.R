@@ -174,3 +174,15 @@ beamer_presentation_format <- function(..., format, template = "default", metada
 
   fmt
 }
+
+
+# from remedy package
+enclose <- function(prefix, postfix = prefix) {
+  a <- rstudioapi::getSourceEditorContext()
+  for (s in a$selection)
+    rstudioapi::insertText(location = s$range, text = sprintf("%s%s%s", prefix, s$text, postfix))
+}
+
+
+#' @title dollar
+dollar <- function() enclose("$")
