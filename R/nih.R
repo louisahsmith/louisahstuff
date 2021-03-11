@@ -15,7 +15,7 @@ nih <- function(..., metadata = NULL, type = "pdf") {
                                template = "nih.tex",
                                metadata = metadata,
                                bibstyle = "nih",
-                               bibliography = "library_fixed"))
+                               bibliography = "library"))
   }
   if(type == "word"){
     return(word_document_format(...,
@@ -23,7 +23,7 @@ nih <- function(..., metadata = NULL, type = "pdf") {
                                 template = "nih.docx",
                                 metadata = metadata,
                                 bibstyle = "nih",
-                                bibliography = "library_fixed"))
+                                bibliography = "library"))
   }
   if(!type %in% c("pdf", "word")) stop("Other formats not yet supported")
 }

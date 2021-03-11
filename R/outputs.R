@@ -49,7 +49,7 @@ epidemiology <- function(..., metadata = NULL, type = "pdf") {
                         template = "epidemiology.tex",
                         metadata = metadata,
                         bibstyle = "epidemiology",
-                      bibliography = "library_fixed"))
+                      bibliography = "library"))
   }
   if(type == "word"){
     return(word_document_format(...,
@@ -57,23 +57,23 @@ epidemiology <- function(..., metadata = NULL, type = "pdf") {
                         template = "epidemiology.docx",
                         metadata = metadata,
                         bibstyle = "epidemiology",
-                      bibliography = "library_fixed"))
+                      bibliography = "library"))
   }
-  if(type == "redoc"){
-    return(redoc_document_format(...,
-                                format = "epidemiology",
-                                template = "epidemiology.docx",
-                                metadata = metadata,
-                                bibstyle = "epidemiology",
-                                bibliography = "library_fixed"))
-  }
+  # if(type == "redoc"){
+  #   return(redoc_document_format(...,
+  #                               format = "epidemiology",
+  #                               template = "epidemiology.docx",
+  #                               metadata = metadata,
+  #                               bibstyle = "epidemiology",
+  #                               bibliography = "library"))
+  # }
   if(type == "reports") {
     return(word_document_format(...,
                                 format = "epidemiology",
                                 template = "epidemiology.docx",
                                 metadata = metadata,
                                 bibstyle = "reports",
-                                bibliography = "library_fixed"))
+                                bibliography = "library"))
   }
   # if(!type %in% c("pdf", "word", "reports")) stop("Other formats not yet supported")
 }

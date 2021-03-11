@@ -3,6 +3,11 @@ Description: A Shiny gadget that allows for text input to create formatted progr
 Binding: helper
 Interactive: true
 
+Name: Outline targets
+Description: Insert headers into the `_targets.R` document for use with the RStudio outline.
+Binding: outline_targets
+Interactive: true
+
 Name: Word to Rmd
 Description: A Shiny gadget that allows conversion of Word documents back to Rmd files with correct references
 Binding: word_to_Rmd
