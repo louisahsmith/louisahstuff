@@ -192,7 +192,7 @@ create_pkg_function <- function() {
   func <- rstudioapi::primary_selection(rstudioapi::getSourceEditorContext())
   f_name <- stringr::str_squish(stringr::str_split(func$text, "\\s*\\<\\-\\s*function\\(")[[1]][1])
   usethis::edit_file(file.path("R", paste0(f_name, ".R")))
-  eval(parse(text = func$text))
+  eval(parse(text = func$text), envir = .GlobalEnv)
   params <- rlang::fn_fmls_names(match.fun(f_name))
   to_insert <- paste0("#' @title ", f_name, "\n#' @description \n",
                       paste(paste0("#' @param ", params), collapse = "\n"),
@@ -200,5 +200,6 @@ create_pkg_function <- function() {
                       paste(c("#' @return", "#' @examples", "#' @export"), collapse = "\n"),
                       "\n\n",
                       func$text)
-  rstudioapi::insertText(Inf, to_insert)
+  doc_id <- rstudioapi::navigateToFile(file.path("R", paste0(f_name, ".R")))
+  rstudioapi::insertText(Inf, text = to_insert, id = doc_id)
 }
