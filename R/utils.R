@@ -186,3 +186,19 @@ enclose <- function(prefix, postfix = prefix) {
 
 #' @title dollar
 dollar <- function() enclose("$")
+
+#' @title create_pkg_function
+create_pkg_function <- function() {
+  func <- rstudioapi::primary_selection(rstudioapi::getSourceEditorContext())
+  f_name <- stringr::str_squish(stringr::str_split(func$text, "\\s*\\<\\-\\s*function\\(")[[1]][1])
+  usethis::edit_file(file.path("R", paste0(f_name, ".R")))
+  eval(parse(text = func$text))
+  params <- rlang::fn_fmls_names(match.fun(f_name))
+  to_insert <- paste0("#' @title ", f_name, "\n#' @description \n",
+                      paste(paste0("#' @param ", params), collapse = "\n"),
+                      "\n",
+                      paste(c("#' @return", "#' @examples", "#' @export"), collapse = "\n"),
+                      "\n\n",
+                      func$text)
+  rstudioapi::insertText(Inf, to_insert)
+}
